@@ -2,7 +2,7 @@ __author__ = 'Mario'
 
 from tkinter import Tk, RIGHT, BOTH, RAISED
 from tkinter.ttk import Frame, Button, Style
-import Homework1
+import HomeworkOneFunctions
 import sys
 import subprocess as sub
 
@@ -41,12 +41,12 @@ class Example(Frame):
 
         self.pack(fill=BOTH, expand=1)
 
-        ChickenButton = Button(self, text="ChickenNugget", command = Homework1.chickennugget_main)
+        ChickenButton = Button(self, text="ChickenNugget", command = HomeworkOneFunctions.chickennugget_main)
         ChickenButton.pack(side=RIGHT)
-        ChickenButton.bind('<c>', Homework1.chickennugget_main)
-        GuessButton = Button(self, text="GuessTheNumber", command = Homework1.guessinggame_main)
+        ChickenButton.bind('<c>', HomeworkOneFunctions.chickennugget_main)
+        GuessButton = Button(self, text="GuessTheNumber", command = HomeworkOneFunctions.guessinggame_main)
         GuessButton.pack(side=RIGHT)
-        ChickenButton.bind('<g>', Homework1.chickennugget_main)
+        ChickenButton.bind('<g>', HomeworkOneFunctions.chickennugget_main)
 
 def main():
 

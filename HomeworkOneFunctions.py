@@ -28,20 +28,25 @@ def guessinggame_main():
     print("The computer will now guess this number.")
 
     guess = 50
-    guesslist = [0, guess, 101]
-    counter = 0
+    guesslist = [guess]
+    upperbound = 100
+    lowerbound = 1
+    counter = 1
 
     # for guess != usernum:
         # if
 
-    while guess != usernum:
-        if guess > usernum:
-            guess = guess - guess//2
-        else:
-            guess = guess + guess//2
+    while guesslist[-1] != usernum:
+        if guesslist[-1] > usernum:
+            guess = guesslist[-1] - guess//(counter*2)
+            if guess == guesslist[-1]:
+                guess = guesslist[-1]-1
+        if guesslist[-1] < usernum:
+            guess = guesslist[-1] + guess//(counter*2)
+            if guess == guesslist[-1]:
+                guess = guesslist[-1]+1
 
         guesslist.append(guess)
-        # guesslist.sort()
         counter = counter+1
 
     if guess == usernum:
