@@ -1,5 +1,14 @@
 __author__ = 'mario'
 
+def main():
+    useinput = input("Would you like to excecute the chicken nugget simulation [0] or guessing game [1]? " )
+
+    if useinput is '0' or 'y':
+        chickennugget_main()
+    else:
+        guessinggame_main()
+
+
 def chickennugget_main():
 
     clst = [6, 9, 20]
@@ -19,5 +28,26 @@ def guessinggame_main():
     print("The computer will now guess this number.")
 
     guess = 50
+    guesslist = [guess]
+    counter = 0
+
+    # for guess != usernum:
+        # if
+
     while guess != usernum:
         if guess > usernum:
+            guess = guess - guess//2
+            guesslist.append(guess)
+        else:
+            guess = guess + guess//2
+            guesslist.append(guess)
+            # print("Found it: ", guess)
+        counter = counter+1
+
+
+
+    if guess == usernum:
+        print("Found it: ", guess, "in {} tries", counter)
+
+if __name__ == '__main__':
+    main()
