@@ -38,6 +38,7 @@ def guessinggame_main():
 
     while guesslist[-1] != usernum:
         if guesslist[-1] > usernum:
+            guess = upperbound/guesslist[-1]
             guess = guesslist[-1] - guess//(counter*2)
             if guess == guesslist[-1]:
                 guess = guesslist[-1]-1
