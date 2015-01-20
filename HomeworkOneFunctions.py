@@ -22,36 +22,50 @@ def chickennugget_main():
 
 def guessinggame_main():
     import random
+    import GuessMyNumber
+    import sys
 
-    usernum = random.randint(1,100)
-    print("To save you the hassle, you choose to pick the number:", usernum)
-    print("The computer will now guess this number.")
+    print("Would you like to pick a number [Y] or have it (default) randomly generated?")
+    yes = set(['yes', 'Yes', 'Y', 'y'])
+    Question = input()
 
-    guess = 50
-    guesslist = [guess]
-    upperbound = 100
-    lowerbound = 1
-    counter = 1
+    if Question in yes:
+        A = input("Please enter a number between 1 - 100: ")
+        GuessMyNumber.Guessengine(A)
+    else:
+        A = random.randint(1,100)
+        print("To save you the hassle, you choose to pick the number:", A)
+        GuessMyNumber.Guessengine(A)
 
-    # for guess != usernum:
-        # if
-
-    while guesslist[-1] != usernum:
-        if guesslist[-1] > usernum:
-            guess = upperbound/guesslist[-1]
-            guess = guesslist[-1] - guess//(counter*2)
-            if guess == guesslist[-1]:
-                guess = guesslist[-1]-1
-        if guesslist[-1] < usernum:
-            guess = guesslist[-1] + guess//(counter*2)
-            if guess == guesslist[-1]:
-                guess = guesslist[-1]+1
-
-        guesslist.append(guess)
-        counter = counter+1
-
-    if guess == usernum:
-        print("Found it: ", guess, "in {} tries", counter)
+    # print("The computer will now guess this number.")
+    #
+    #
+    # guess = 50
+    # guesslist = [guess]
+    # upperbound = 100
+    # lowerbound = 1
+    # counter = 1
+    #
+    # # for guess != usernum:
+    # # if
+    #
+    # while guesslist[-1] != usernum:
+    #     if guesslist[-1] > usernum:
+    #         guess = (max(guesslist)-guesslist[-1])//2
+    #         # guess = guesslist[-1] - guess//(counter*2)
+    #         if guess == guesslist[-1]:
+    #             guess = guesslist[-1]-1
+    #     if guesslist[-1] < usernum:
+    #         guess = lowerbound/guesslist[-1]
+    #         guess = guesslist[-1] + guess//(counter*2)
+    #         if guess == guesslist[-1]:
+    #             guess = guesslist[-1]+1
+    #
+    #     guesslist.append(guess)
+    #     counter = counter+1
+    #
+    # if guess == usernum:
+    #     print("Found it: ", guess, "in {} tries", counter)
 
 if __name__ == '__main__':
     main()
