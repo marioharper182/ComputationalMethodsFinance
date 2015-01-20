@@ -2,6 +2,10 @@ __author__ = 'Mario'
 
 from tkinter import Tk, RIGHT, BOTH, RAISED
 from tkinter.ttk import Frame, Button, Style
+import Homework1
+import sys
+import subprocess as sub
+
 
 
 class Example(Frame):
@@ -10,8 +14,21 @@ class Example(Frame):
         Frame.__init__(self, parent)
 
         self.parent = parent
-
         self.initUI()
+
+    def run_script(self):
+        p = sub.Popen('./script',stdout=sub.PIPE,stderr=sub.PIPE)
+        output, errors = p.communicate()
+        sys.stdout = self
+        ## sys.stderr = self
+        try:
+            del(sys.modules["test_script"])
+        except:
+            ## Yeah, it's a real ugly solution...
+            pass
+        # import test_script
+        print('Hello Mario, console output is working')
+        sys.stdout = sys.__stdout__
 
     def initUI(self):
 
@@ -24,17 +41,12 @@ class Example(Frame):
 
         self.pack(fill=BOTH, expand=1)
 
-        closeButton = Button(self, text="Close", command=Example.destroy)
-        closeButton.pack(side=RIGHT, padx=5, pady=5)
-        okButton = Button(self, text="Excecute", command=self.ExcecuteButton())
-        okButton.pack(side=RIGHT)
-
-
-    def ExcecuteButton(self):
-
-        pass
-
-
+        ChickenButton = Button(self, text="ChickenNugget", command = Homework1.chickennugget_main)
+        ChickenButton.pack(side=RIGHT)
+        ChickenButton.bind('<c>', Homework1.chickennugget_main)
+        GuessButton = Button(self, text="GuessTheNumber", command = Homework1.guessinggame_main)
+        GuessButton.pack(side=RIGHT)
+        ChickenButton.bind('<g>', Homework1.chickennugget_main)
 
 def main():
 

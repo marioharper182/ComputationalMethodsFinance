@@ -28,7 +28,7 @@ def guessinggame_main():
     print("The computer will now guess this number.")
 
     guess = 50
-    guesslist = [guess]
+    guesslist = [0, guess, 101]
     counter = 0
 
     # for guess != usernum:
@@ -37,14 +37,12 @@ def guessinggame_main():
     while guess != usernum:
         if guess > usernum:
             guess = guess - guess//2
-            guesslist.append(guess)
         else:
             guess = guess + guess//2
-            guesslist.append(guess)
-            # print("Found it: ", guess)
+
+        guesslist.append(guess)
+        # guesslist.sort()
         counter = counter+1
-
-
 
     if guess == usernum:
         print("Found it: ", guess, "in {} tries", counter)

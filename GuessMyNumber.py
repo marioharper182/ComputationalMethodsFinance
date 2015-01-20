@@ -1,1 +1,3 @@
-__author__ = 'Mar
+__author__ = 'Mario'
+
+import Homework1
