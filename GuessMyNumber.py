@@ -10,15 +10,12 @@ def Guessengine(A):
     guess = [50]
     g = 0
     counter = 0
-    # i = 50
     while guess[-1] != A:
         if guess[-1] < A:
             if high is not None:
                 g = (high - guess[-1]) // 2 + guess[-1]
             else:
                 g = (max(guess)-guess[-1]) // 2 + guess[-1]
-        # if min(guess) == 0:
-        #     guess.remove(0)
             if low != None:
                 low = None
             if g == guess[-1]:
@@ -28,8 +25,6 @@ def Guessengine(A):
             if low is not None:
                 g = guess[-1] - (guess[-1] - low)// 2
             else: g = guess[-1] - (guess[-1] - min(guess)) // 2
-            # if max(guess) == 101:
-            #     guess.remove(101)
             if high != None:
                 high = None
             if g == guess[-1]:
