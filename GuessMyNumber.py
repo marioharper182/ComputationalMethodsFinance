@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import itertools
 
 def Guessengine(A):
-    print(A)
+    # print(A)
     numbertoguess = int(A)
 
     low = 0
@@ -49,7 +49,6 @@ def Guessengine(A):
     if guess[-1] == numbertoguess:
         print("Success! Took", counter+1, "tries")
 
-        tuples = zip(trieslist, matplotlist)
         plt.figure(1)
         plt.plot(trieslist, matplotlist, 'bo',linestyle = '-', linewidth = 2.00)
         # plt.plot([guess[-1], 0 ], [guess[-1], len(trieslist)], 'r', linestyle = '-', linewidth = 1.00)
