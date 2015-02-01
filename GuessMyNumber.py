@@ -1,21 +1,23 @@
 __author__ = 'Mario'
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import itertools
 
 def Guessengine(A):
-    # print(A)
-    numbertoguess = int(A)
 
+    A = int(A)
+
+    # Basic Parameters
     low = 0
     high = 101
-
-    matplotlist = [50]
-    trieslist = [0]
     guess = [50]
     g = 0
     counter = 0
+
+    # Plotting information is stored here:
+    matplotlist = [50]
+    trieslist = [0]
 
     while guess[-1] != A:
         if guess[-1] < A:
@@ -28,7 +30,7 @@ def Guessengine(A):
             if g == guess[-1]:
                 g = g + 1
 
-        if guess[-1] > numbertoguess:
+        if guess[-1] > A:
             if low is not None:
                 g = guess[-1] - (guess[-1] - low)// 2
             else: g = guess[-1] - (guess[-1] - min(guess)) // 2
@@ -44,18 +46,17 @@ def Guessengine(A):
         guess.append(g)
         counter = counter +1
         trieslist.append(counter)
-        print(guess[-1])
+        # print(guess[-1])
 
-    if guess[-1] == numbertoguess:
-        print("Success! Took", counter+1, "tries")
+    if guess[-1] == A:
 
         plt.figure(1)
         plt.plot(trieslist, matplotlist, 'bo',linestyle = '-', linewidth = 2.00)
+        plt.xlabel("Guess Iteration")
+        plt.ylabel("Guessed Value")
+        plt.title("Path to guess")
         # plt.plot([guess[-1], 0 ], [guess[-1], len(trieslist)], 'r', linestyle = '-', linewidth = 1.00)
         # plt.plot(*zip(*itertools.chain.from_iterable(itertools.combinations(tuples, 2))), color = 'blue',marker = 'o', linewidth = 2.00)
         plt.show()
 
-def Matplotwindow():
-    pass
-
-    # tries = trieslist
+        return ("Success! Took", str(counter+1), "tries")
