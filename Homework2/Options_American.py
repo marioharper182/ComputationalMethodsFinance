@@ -1,12 +1,9 @@
 __author__ = 'HarperMain'
-
 import numpy as np
-from numpy import random as rand
 from scipy.stats import binom
-from numpy import zeros
 
+class AmericanOption(object):
 
-class EuropeanOption(object):
     def __init__(self, strike, X, rate, volatility, T, n):
         self.strike = strike
         self.X = X
@@ -23,20 +20,26 @@ class EuropeanOption(object):
         P = (np.exp(self.rate*h) - d) / (u - d)
         Pc = 1-P
 
-        Call = []
-        Put = []
+        CallMatrix = []
+        PutMatrix = []
 
-        for i in range(0, nodes):
-            spot = self.strike * (u ** (nodes-i))* (d ** i)
-            callvar = self.CallPayOff(spot, X) * binom.pmf(self.T - i, self.T, P)
-            PutTvar = self.PutPayOff(spot, X) * binom.pmf(self.T - i, self.T, Pc)
-            Call.append(callvar)
-            Put.append(PutTvar)
+        for j in range(0, T):
+            Call = []
+            Put = []
+            # jnodes = nodes-(T-j)
+            for i in range(0, j):
+                spot = self.strike * (u ** (j-i))* (d ** i)
+                callvar = self.CallPayOff(spot, X) * binom.pmf(self.T - i, self.T, P)
+                PutTvar = self.PutPayOff(spot, X) * binom.pmf(self.T - i, self.T, Pc)
+                Call.append(callvar)
+                Put.append(PutTvar)
 
-        self.callPrice = sum(Call) / (np.exp(self.rate*self.T))
-        self.putPrice = sum(Put) / (np.exp(self.rate*self.T))
+            CallMatrix.append(Call)
+            PutMatrix.append(Put)
 
-
+        print('Loop Completed')
+        print(CallMatrix)
+        print(PutMatrix)
 
     def GetStrike(self):
         return self.strike
@@ -45,7 +48,7 @@ class EuropeanOption(object):
         self.strike = strike
 
     def GetPrice(self):
-        return ('The price of the call option and put options are respectively: ', self.callPrice, self.putPrice)
+        return (self.callPrice, self.putPrice)
 
     def CallPayOff(self, spot, strike):
         return max(spot-strike, 0.0)
@@ -54,6 +57,6 @@ class EuropeanOption(object):
         return max(strike-spot, 0.0)
 
 def main():
-    EuropeanOption(100, 100, .03, .25, 5, 1)
+    AmericanOption(100, 80, .03, .25, 5, 1)
 if __name__ == '__main__':
     main()
