@@ -20,8 +20,8 @@ class AmericanOption(object):
         P = (np.exp(self.rate*h) - d) / (u - d)
         Pc = 1-P
 
-        CallMatrix = []
-        PutMatrix = []
+        self.CallMatrix = []
+        self.PutMatrix = []
 
         for j in range(0, T):
             Call = []
@@ -30,16 +30,16 @@ class AmericanOption(object):
             for i in range(0, j):
                 spot = self.strike * (u ** (j-i))* (d ** i)
                 callvar = self.CallPayOff(spot, X) * binom.pmf(self.T - i, self.T, P)
-                PutTvar = self.PutPayOff(spot, X) * binom.pmf(self.T - i, self.T, Pc)
+                putvar = self.PutPayOff(spot, X) * binom.pmf(self.T - i, self.T, Pc)
                 Call.append(callvar)
-                Put.append(PutTvar)
+                Put.append(putvar)
 
-            CallMatrix.append(Call)
-            PutMatrix.append(Put)
+            self.CallMatrix.append(Call)
+            self.PutMatrix.append(Put)
 
         print('Loop Completed')
-        print(CallMatrix)
-        print(PutMatrix)
+        print(self.CallMatrix)
+        print(self.PutMatrix)
 
     def GetStrike(self):
         return self.strike
@@ -48,7 +48,7 @@ class AmericanOption(object):
         self.strike = strike
 
     def GetPrice(self):
-        return (self.callPrice, self.putPrice)
+        return (self.CallMatrix, self.PutMatrix)
 
     def CallPayOff(self, spot, strike):
         return max(spot-strike, 0.0)
